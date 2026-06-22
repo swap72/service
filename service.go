@@ -25,7 +25,7 @@ func main() {
 
 func copySelfToDirectory(destDir string) error {
 
-	// 2. Get the exact path of this currently running executable
+	
 	currentExePath, err := os.Executable()
 	if err != nil {
 		return fmt.Errorf("could not find executable path: %w", err)
@@ -35,7 +35,7 @@ func copySelfToDirectory(destDir string) error {
 	exeName := filepath.Base(currentExePath)
 	targetPath := filepath.Join(destDir, exeName)
 
-	// Guard rail: Prevent copying the file over itself if already running from targetPath
+	
 	if currentExePath == targetPath {
 		fmt.Println("The program is already running from the target destination.")
 		return nil
