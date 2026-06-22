@@ -31,7 +31,7 @@ func copySelfToDirectory(destDir string) error {
 		return fmt.Errorf("could not find executable path: %w", err)
 	}
 
-	// 3. Extract the binary name and build the final target path
+	
 	exeName := filepath.Base(currentExePath)
 	targetPath := filepath.Join(destDir, exeName)
 
@@ -41,21 +41,21 @@ func copySelfToDirectory(destDir string) error {
 		return nil
 	}
 
-	// 4. Open the currently running binary for reading
+	
 	sourceFile, err := os.Open(currentExePath)
 	if err != nil {
 		return fmt.Errorf("could not open source file: %w", err)
 	}
 	defer sourceFile.Close()
 
-	// 5. Create the new executable file at the destination
+	
 	destFile, err := os.OpenFile(targetPath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0755)
 	if err != nil {
 		return fmt.Errorf("could not create target file: %w", err)
 	}
 	defer destFile.Close()
 
-	// 6. Stream the bytes from the running binary into the new file
+	
 	_, err = io.Copy(destFile, sourceFile)
 	if err != nil {
 		return fmt.Errorf("failed during data copy: %w", err)
